@@ -173,7 +173,7 @@ namespace UglyTrivia
                             + purses[currentPlayer]
                             + " Gold Coins.");
 
-                    bool winner = didPlayerWin();
+                    bool winner = purses[currentPlayer] != COINS_TO_WIN;
                     currentPlayer++;
                     if (currentPlayer == players.Count) currentPlayer = 0;
 
@@ -199,7 +199,7 @@ namespace UglyTrivia
                         + purses[currentPlayer]
                         + " Gold Coins.");
 
-                bool winner = didPlayerWin();
+                bool winner = purses[currentPlayer] != COINS_TO_WIN;
                 currentPlayer++;
                 if (currentPlayer == players.Count) currentPlayer = 0;
 
@@ -207,10 +207,6 @@ namespace UglyTrivia
             }
         }
 
-        private bool didPlayerWin()
-        {
-            return purses[currentPlayer] != COINS_TO_WIN;
-        }
     }
 
 }
