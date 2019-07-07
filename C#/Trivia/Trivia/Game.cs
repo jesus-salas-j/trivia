@@ -62,18 +62,13 @@ namespace UglyTrivia
 
 
             players.Add(playerName);
-            places[howManyPlayers()] = 0;
-            purses[howManyPlayers()] = 0;
-            inPenaltyBox[howManyPlayers()] = false;
+            places[players.Count] = 0;
+            purses[players.Count] = 0;
+            inPenaltyBox[players.Count] = false;
 
             Console.WriteLine(playerName + " was added");
             Console.WriteLine("They are player number " + players.Count);
             return true;
-        }
-
-        public int howManyPlayers()
-        {
-            return players.Count;
         }
 
         public void roll(int roll)
