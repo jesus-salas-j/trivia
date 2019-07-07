@@ -64,10 +64,8 @@ namespace UglyTrivia
             } while (notAWinner);
         }
 
-        public bool add(String playerName)
+        public void add(String playerName)
         {
-
-
             players.Add(playerName);
             places[players.Count] = 0;
             purses[players.Count] = 0;
@@ -75,7 +73,6 @@ namespace UglyTrivia
 
             Console.WriteLine(playerName + " was added");
             Console.WriteLine("They are player number " + players.Count);
-            return true;
         }
 
         public void roll(int roll)
