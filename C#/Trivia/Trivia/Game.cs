@@ -57,11 +57,6 @@ namespace UglyTrivia
             } while (notAWinner);
         }
 
-        public bool isPlayable()
-        {
-            return (howManyPlayers() >= 2);
-        }
-
         public bool add(String playerName)
         {
 
