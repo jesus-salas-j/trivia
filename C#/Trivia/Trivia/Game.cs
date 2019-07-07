@@ -6,6 +6,7 @@ namespace UglyTrivia
 {
     public class Game
     {
+        private const int COINS_TO_WIN = 6;
         private bool notAWinner;
 
         List<string> players = new List<string>();
@@ -208,7 +209,7 @@ namespace UglyTrivia
 
         private bool didPlayerWin()
         {
-            return purses[currentPlayer] != 6;
+            return purses[currentPlayer] != COINS_TO_WIN;
         }
     }
 
