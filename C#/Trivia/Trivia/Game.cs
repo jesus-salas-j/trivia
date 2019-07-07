@@ -48,7 +48,13 @@ namespace UglyTrivia
 
                 if (rand.Next(9) == 7)
                 {
-                    notAWinner = wrongAnswer();
+                    notAWinner = true;
+                    Console.WriteLine("Question was incorrectly answered");
+                    Console.WriteLine(players[currentPlayer] + " was sent to the penalty box");
+                    inPenaltyBox[currentPlayer] = true;
+
+                    currentPlayer++;
+                    if (currentPlayer == players.Count) currentPlayer = 0;
                 }
                 else
                 {
@@ -199,18 +205,6 @@ namespace UglyTrivia
                 return winner;
             }
         }
-
-        public bool wrongAnswer()
-        {
-            Console.WriteLine("Question was incorrectly answered");
-            Console.WriteLine(players[currentPlayer] + " was sent to the penalty box");
-            inPenaltyBox[currentPlayer] = true;
-
-            currentPlayer++;
-            if (currentPlayer == players.Count) currentPlayer = 0;
-            return true;
-        }
-
 
         private bool didPlayerWin()
         {
