@@ -7,7 +7,7 @@ namespace UglyTrivia
 {
     public class Game
     {
-
+        private bool notAWinner;
 
         List<string> players = new List<string>();
 
@@ -33,6 +33,29 @@ namespace UglyTrivia
                 sportsQuestions.AddLast(("Sports Question " + i));
                 rockQuestions.AddLast(createRockQuestion(i));
             }
+        }
+
+        public void Run()
+        {
+            add("Chet");
+            add("Pat");
+            add("Sue");
+
+            Random rand = new Random();
+
+            do
+            {
+                roll(rand.Next(5) + 1);
+
+                if (rand.Next(9) == 7)
+                {
+                    notAWinner = wrongAnswer();
+                }
+                else
+                {
+                    notAWinner = wasCorrectlyAnswered();
+                }
+            } while (notAWinner);
         }
 
         public String createRockQuestion(int index)
