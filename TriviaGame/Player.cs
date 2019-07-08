@@ -5,6 +5,7 @@ namespace TriviaGame
     public class Player
     {
         public string Name { get; }
+        private int goldCoins = 0;
 
         public Player(string name)
         {
@@ -13,7 +14,12 @@ namespace TriviaGame
 
         public int GoldCoins()
         {
-            return 0;
+            return goldCoins;
+        }
+
+        public void IncrementGoldCoins()
+        {
+            goldCoins++;
         }
 
         public override bool Equals(object obj)
@@ -26,5 +32,6 @@ namespace TriviaGame
         {
             return 539060726 + EqualityComparer<string>.Default.GetHashCode(Name);
         }
+
     }
 }
