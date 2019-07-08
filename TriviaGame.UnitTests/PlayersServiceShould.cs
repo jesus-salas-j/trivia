@@ -8,6 +8,7 @@ namespace TriviaGame.UnitTests
         private PlayersService playersService;
 
         private readonly Player A_PLAYER = new Player("John");
+        private readonly Player ANOTHER_PLAYER = new Player("Ann");
 
         [TestInitialize]
         public void Init()
@@ -37,6 +38,18 @@ namespace TriviaGame.UnitTests
             playersService.SetCurrent(A_PLAYER);
 
             Assert.AreEqual(A_PLAYER, playersService.Current());
+        }
+
+        [TestMethod]
+        public void Set_next_player_as_current()
+        {
+            playersService.Add(A_PLAYER);
+            playersService.Add(ANOTHER_PLAYER);
+
+            playersService.SetCurrent(A_PLAYER);
+            playersService.SetNextPlayerAsCurrent();
+
+            Assert.AreEqual(ANOTHER_PLAYER, playersService.Current());
         }
     }
 }

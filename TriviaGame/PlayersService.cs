@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace TriviaGame
 {
@@ -30,6 +31,12 @@ namespace TriviaGame
         public Player Current()
         {
             return current;
+        }
+
+        public void SetNextPlayerAsCurrent()
+        {
+            int currentPlayerPosition = players.FindIndex(x => x.Equals(current));
+            current = players.ElementAt(currentPlayerPosition + 1);
         }
     }
 }
