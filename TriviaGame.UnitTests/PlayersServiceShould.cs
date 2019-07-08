@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TriviaGame.UnitTests
 {
     [TestClass]
-    public class PlayersShould
+    public class PlayersServiceShould
     {
         private PlayersService playersService;
 

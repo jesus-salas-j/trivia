@@ -7,34 +7,40 @@ namespace TriviaGame
     public class Game
     {
         private const int COINS_TO_WIN = 6;
+        private const int QUESTIONS_NUMBER = 50;
         private bool notAWinner;
 
-        int[] places = new int[6];
-        int[] purses = new int[6];
+        private int[] places = new int[6];
+        private int[] purses = new int[6];
 
-        bool[] inPenaltyBox = new bool[6];
+        private bool[] inPenaltyBox = new bool[6];
 
-        LinkedList<string> popQuestions = new LinkedList<string>();
-        LinkedList<string> scienceQuestions = new LinkedList<string>();
-        LinkedList<string> sportsQuestions = new LinkedList<string>();
-        LinkedList<string> rockQuestions = new LinkedList<string>();
+        private LinkedList<string> popQuestions = new LinkedList<string>();
+        private LinkedList<string> scienceQuestions = new LinkedList<string>();
+        private LinkedList<string> sportsQuestions = new LinkedList<string>();
+        private LinkedList<string> rockQuestions = new LinkedList<string>();
 
-        int currentPlayer = 0;
-        bool isGettingOutOfPenaltyBox;
+        private int currentPlayer = 0;
+        private bool isGettingOutOfPenaltyBox;
 
         private PlayersService playersService;
 
         public Game()
         {
-            for (int i = 0; i < 50; i++)
+            InitializeQuestions();
+
+            playersService = new PlayersService();
+        }
+
+        private void InitializeQuestions()
+        {
+            for (int i = 0; i < QUESTIONS_NUMBER; i++)
             {
                 popQuestions.AddLast("Pop Question " + i);
                 scienceQuestions.AddLast(("Science Question " + i));
                 sportsQuestions.AddLast(("Sports Question " + i));
                 rockQuestions.AddLast("Rock Question " + i);
             }
-
-            playersService = new PlayersService();
         }
 
         public void Run()
