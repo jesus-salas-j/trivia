@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UglyTrivia
+namespace TriviaGame
 {
     public class Game
     {
