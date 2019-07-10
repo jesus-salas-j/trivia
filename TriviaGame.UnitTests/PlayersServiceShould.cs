@@ -7,8 +7,8 @@ namespace TriviaGame.UnitTests
     {
         private PlayersService playersService;
 
-        private readonly Player A_PLAYER = new Player("John");
-        private readonly Player ANOTHER_PLAYER = new Player("Ann");
+        private Player A_PLAYER = new Player("John");
+        private Player ANOTHER_PLAYER = new Player("Ann");
 
         [TestInitialize]
         public void Init()
@@ -63,6 +63,17 @@ namespace TriviaGame.UnitTests
             playersService.SetNextPlayerAsCurrent();
 
             Assert.AreEqual(A_PLAYER, playersService.Current());
+        }
+
+        [TestMethod]
+        public void Increment_player_gold_coins()
+        {
+            Player player = new Player("Charles");
+            playersService.Add(player);
+
+            playersService.IncrementGoldCoinsFor(player);
+
+            Assert.AreEqual(1, player.GoldCoins());
         }
     }
 }

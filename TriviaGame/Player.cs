@@ -5,7 +5,7 @@ namespace TriviaGame
     public class Player
     {
         public string Name { get; }
-        private int goldCoins = 0;
+        private int goldCoins;
 
         public Player(string name)
         {

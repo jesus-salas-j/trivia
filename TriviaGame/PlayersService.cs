@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TriviaGame
@@ -54,5 +55,11 @@ namespace TriviaGame
         {
             return players.FindIndex(x => x.Equals(current));
         }
+
+        public void IncrementGoldCoinsFor(Player player)
+        {
+            player.IncrementGoldCoins();
+        }
+
     }
 }
