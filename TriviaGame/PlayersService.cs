@@ -35,8 +35,24 @@ namespace TriviaGame
 
         public void SetNextPlayerAsCurrent()
         {
-            int currentPlayerPosition = players.FindIndex(x => x.Equals(current));
-            current = players.ElementAt(currentPlayerPosition + 1);
+            if (IsLastPosition(CurrentPlayerPosition()))
+            {
+                current = players.ElementAt(0);
+            }
+            else
+            {
+                current = players.ElementAt(CurrentPlayerPosition() + 1);
+            }            
+        }
+
+        private bool IsLastPosition(int position)
+        {
+            return position == players.Count - 1;
+        }
+
+        private int CurrentPlayerPosition()
+        {
+            return players.FindIndex(x => x.Equals(current));
         }
     }
 }
