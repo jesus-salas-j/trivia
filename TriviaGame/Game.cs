@@ -11,8 +11,6 @@ namespace TriviaGame
         private bool notAWinner;
 
         private int[] places = new int[6];
-        private int[] purses = new int[6];
-
         private bool[] inPenaltyBox = new bool[6];
 
         private LinkedList<string> popQuestions = new LinkedList<string>();
@@ -76,7 +74,6 @@ namespace TriviaGame
         {
             playersService.Add(new Player(playerName));
             places[playersService.Count()] = 0;
-            purses[playersService.Count()] = 0;
             inPenaltyBox[playersService.Count()] = false;
 
             Console.WriteLine(playerName + " was added");
@@ -172,13 +169,13 @@ namespace TriviaGame
                 if (isGettingOutOfPenaltyBox)
                 {
                     Console.WriteLine("Answer was correct!!!!");
-                    purses[currentPlayer]++;
+                    playersService.Current().IncrementGoldCoins();
                     Console.WriteLine(playersService.Current().Name
                             + " now has "
-                            + purses[currentPlayer]
+                            + playersService.Current().GoldCoins()
                             + " Gold Coins.");
 
-                    bool winner = purses[currentPlayer] != COINS_TO_WIN;
+                    bool winner = playersService.Current().GoldCoins() != COINS_TO_WIN;
                     currentPlayer++;
                     if (currentPlayer == playersService.Count()) currentPlayer = 0;
 
@@ -198,13 +195,13 @@ namespace TriviaGame
             {
 
                 Console.WriteLine("Answer was corrent!!!!");
-                purses[currentPlayer]++;
+                playersService.Current().IncrementGoldCoins();
                 Console.WriteLine(playersService.Current().Name
                         + " now has "
-                        + purses[currentPlayer]
+                        + playersService.Current().GoldCoins()
                         + " Gold Coins.");
 
-                bool winner = purses[currentPlayer] != COINS_TO_WIN;
+                bool winner = playersService.Current().GoldCoins() != COINS_TO_WIN;
                 currentPlayer++;
                 if (currentPlayer == playersService.Count()) currentPlayer = 0;
 
