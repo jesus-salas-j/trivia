@@ -11,7 +11,6 @@ namespace TriviaGame
         private bool notAWinner;
 
         private int[] places = new int[6];
-        private bool[] inPenaltyBox = new bool[6];
 
         private LinkedList<string> popQuestions = new LinkedList<string>();
         private LinkedList<string> scienceQuestions = new LinkedList<string>();
@@ -22,12 +21,14 @@ namespace TriviaGame
         private bool isGettingOutOfPenaltyBox;
 
         private PlayersService playersService;
+        private Board board;
 
         public Game()
         {
             InitializeQuestions();
 
             playersService = new PlayersService();
+            board = new Board();
         }
 
         private void InitializeQuestions()
@@ -58,10 +59,11 @@ namespace TriviaGame
                     notAWinner = true;
                     Console.WriteLine("Question was incorrectly answered");
                     Console.WriteLine(playersService.Current().Name + " was sent to the penalty box");
-                    inPenaltyBox[currentPlayer] = true;
+                    board.PutInPenaltyBox(playersService.Current());
 
                     currentPlayer++;
                     if (currentPlayer == playersService.Count()) currentPlayer = 0;
+                    playersService.SetNextPlayerAsCurrent();
                 }
                 else
                 {
@@ -74,7 +76,6 @@ namespace TriviaGame
         {
             playersService.Add(new Player(playerName));
             places[playersService.Count()] = 0;
-            inPenaltyBox[playersService.Count()] = false;
 
             Console.WriteLine(playerName + " was added");
             Console.WriteLine("They are player number " + playersService.Count());
@@ -85,7 +86,7 @@ namespace TriviaGame
             Console.WriteLine(playersService.Current().Name + " is the current player");
             Console.WriteLine("They have rolled a " + roll);
 
-            if (inPenaltyBox[currentPlayer])
+            if (board.IsInPenaltyBox(playersService.Current()))
             {
                 if (roll % 2 != 0)
                 {
@@ -148,7 +149,7 @@ namespace TriviaGame
         }
 
 
-        private String currentCategory()
+        private String currentCategory() 
         {
             if (places[currentPlayer] == 0) return "Pop";
             if (places[currentPlayer] == 4) return "Pop";
@@ -164,7 +165,7 @@ namespace TriviaGame
 
         public bool wasCorrectlyAnswered()
         {
-            if (inPenaltyBox[currentPlayer])
+            if (board.IsInPenaltyBox(playersService.Current()))
             {
                 if (isGettingOutOfPenaltyBox)
                 {
@@ -178,6 +179,7 @@ namespace TriviaGame
                     bool winner = playersService.Current().GoldCoins() != COINS_TO_WIN;
                     currentPlayer++;
                     if (currentPlayer == playersService.Count()) currentPlayer = 0;
+                    playersService.SetNextPlayerAsCurrent();
 
                     return winner;
                 }
@@ -185,6 +187,7 @@ namespace TriviaGame
                 {
                     currentPlayer++;
                     if (currentPlayer == playersService.Count()) currentPlayer = 0;
+                    playersService.SetNextPlayerAsCurrent();
                     return true;
                 }
 
@@ -204,9 +207,10 @@ namespace TriviaGame
                 bool winner = playersService.Current().GoldCoins() != COINS_TO_WIN;
                 currentPlayer++;
                 if (currentPlayer == playersService.Count()) currentPlayer = 0;
+                playersService.SetNextPlayerAsCurrent();
 
                 return winner;
-            }
+           } 
         }
 
     }
