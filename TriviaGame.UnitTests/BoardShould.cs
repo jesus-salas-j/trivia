@@ -39,5 +39,15 @@ namespace TriviaGame.UnitTests
 
             Assert.IsTrue(board.IsInPenaltyBox(A_PLAYER));
         }
+
+        [TestMethod]
+        public void Put_player_in_board()
+        {
+            Square square = new Square(0);
+
+            board.Add(A_PLAYER);
+
+            Assert.IsTrue(board.GetPlayersIn(square).Contains(A_PLAYER));
+        }
     }
 }
