@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using UglyTrivia;
 
@@ -23,14 +21,14 @@ namespace Trivia
             List<int> rolls = CreateRollsSequence();
             List<int> squares = CreateSquaresSequence();
 
-            Random rand = new Random();
+            int next = 0;
 
             do
             {
 
-                aGame.roll(rand.Next(5) + 1);
+                aGame.roll(rolls[next]);
 
-                if (rand.Next(9) == 7)
+                if (squares[next] == 7)
                 {
                     notAWinner = aGame.wrongAnswer();
                 }
@@ -39,7 +37,7 @@ namespace Trivia
                     notAWinner = aGame.wasCorrectlyAnswered();
                 }
 
-
+                next++;
 
             } while (notAWinner);
 
