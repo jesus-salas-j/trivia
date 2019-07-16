@@ -1,0 +1,17 @@
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/bin/Debug/netcoreapp2.0/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/bin/Debug/netcoreapp2.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/bin/Debug/netcoreapp2.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/bin/Debug/netcoreapp2.0/TriviaGame.UnitTests.deps.json
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/bin/Debug/netcoreapp2.0/TriviaGame.UnitTests.runtimeconfig.json
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/bin/Debug/netcoreapp2.0/TriviaGame.UnitTests.runtimeconfig.dev.json
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/bin/Debug/netcoreapp2.0/TriviaGame.UnitTests.dll
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/bin/Debug/netcoreapp2.0/TriviaGame.UnitTests.pdb
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/bin/Debug/netcoreapp2.0/TriviaGame.dll
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/bin/Debug/netcoreapp2.0/TriviaGame.pdb
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/obj/Debug/netcoreapp2.0/TriviaGame.UnitTests.csprojAssemblyReference.cache
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/obj/Debug/netcoreapp2.0/TriviaGame.UnitTests.csproj.CoreCompileInputs.cache
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/obj/Debug/netcoreapp2.0/TriviaGame.UnitTests.AssemblyInfoInputs.cache
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/obj/Debug/netcoreapp2.0/TriviaGame.UnitTests.AssemblyInfo.cs
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/obj/Debug/netcoreapp2.0/TriviaGame.UnitTests.csproj.CopyComplete
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/obj/Debug/netcoreapp2.0/TriviaGame.UnitTests.dll
+/Users/jesus.salas/Katas/trivia/TriviaGame.UnitTests/obj/Debug/netcoreapp2.0/TriviaGame.UnitTests.pdb
