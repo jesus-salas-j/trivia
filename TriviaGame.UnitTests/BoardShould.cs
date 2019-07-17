@@ -15,6 +15,12 @@ namespace TriviaGame.UnitTests
         }
 
         [TestMethod]
+        public void Initialize_with_twelve_squares()
+        {
+            Assert.AreEqual(12, board.Squares.Count);
+        }
+
+        [TestMethod]
         public void Set_a_player_in_penalty_box()
         {
             board.PutInPenaltyBox(A_PLAYER);
