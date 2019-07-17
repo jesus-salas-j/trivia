@@ -15,4 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TriviaGame\TriviaGame.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Output\" />
+  </ItemGroup>
 </Project>

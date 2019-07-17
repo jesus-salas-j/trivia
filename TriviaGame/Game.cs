@@ -24,6 +24,8 @@ namespace TriviaGame
         private PlayersService playersService;
         private Board board;
 
+        private StreamWriter writer;
+
         public Game()
         {
             SetConsoleOutputToFile();
@@ -68,6 +70,8 @@ namespace TriviaGame
 
                 next++;
             } while (notAWinner);
+
+            writer.Close();
         }
 
         public void add(String playerName)
@@ -124,7 +128,7 @@ namespace TriviaGame
 
         private void SetConsoleOutputToFile()
         {
-            StreamWriter writer = new StreamWriter("actual_output.txt");
+            writer = new StreamWriter("./actual_output.txt");
             Console.SetOut(writer);
         }
 
