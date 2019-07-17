@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace TriviaGame
@@ -25,21 +26,11 @@ namespace TriviaGame
 
         public Game()
         {
+            SetConsoleOutputToFile();
             InitializeQuestions();
 
             playersService = new PlayersService();
             board = new Board();
-        }
-
-        private void InitializeQuestions()
-        {
-            for (int i = 0; i < QUESTIONS_NUMBER; i++)
-            {
-                popQuestions.AddLast("Pop Question " + i);
-                scienceQuestions.AddLast(("Science Question " + i));
-                sportsQuestions.AddLast(("Sports Question " + i));
-                rockQuestions.AddLast("Rock Question " + i);
-            }
         }
 
         public void Run()
@@ -129,6 +120,23 @@ namespace TriviaGame
                 askQuestion();
             }
 
+        }
+
+        private void SetConsoleOutputToFile()
+        {
+            StreamWriter writer = new StreamWriter("actual_output.txt");
+            Console.SetOut(writer);
+        }
+
+        private void InitializeQuestions()
+        {
+            for (int i = 0; i < QUESTIONS_NUMBER; i++)
+            {
+                popQuestions.AddLast("Pop Question " + i);
+                scienceQuestions.AddLast(("Science Question " + i));
+                sportsQuestions.AddLast(("Sports Question " + i));
+                rockQuestions.AddLast("Rock Question " + i);
+            }
         }
 
         private void askQuestion()
