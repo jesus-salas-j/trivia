@@ -61,5 +61,9 @@ namespace TriviaGame
             player.IncrementGoldCoins();
         }
 
+        public void SetFirstPlayerAsCurrent()
+        {
+            current = players.First();
+        }
     }
 }

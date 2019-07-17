@@ -41,6 +41,17 @@ namespace TriviaGame.UnitTests
         }
 
         [TestMethod]
+        public void Set_first_player_as_current()
+        {
+            playersService.Add(A_PLAYER);
+            playersService.Add(ANOTHER_PLAYER);
+
+            playersService.SetFirstPlayerAsCurrent();
+
+            Assert.AreEqual(A_PLAYER, playersService.Current());
+        }
+
+        [TestMethod]
         public void Set_next_player_as_current()
         {
             playersService.Add(A_PLAYER);
