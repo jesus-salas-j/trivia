@@ -57,5 +57,16 @@ namespace TriviaGame
                 Squares.Add(new Square(i));
             }
         }
+
+        public void MovePlayerToSquare(Player player, Square square)
+        {
+            Squares
+                .Single(x => x.Players.Contains(player))
+                .Players.Remove(player);
+
+            Squares
+                .Single(x => x.Equals(square))
+                .Players.Add(player);                
+        }
     }
 }
