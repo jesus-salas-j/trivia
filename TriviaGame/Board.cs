@@ -63,9 +63,17 @@ namespace TriviaGame
         {
             Square square = Squares.Single(x => x.Players.Contains(player));
             square.Players.Remove(player);
+            int newPosition = (square.Position + positions) % NUMBER_OF_SQUARES;
             Squares
-                .Single(x => x.Position == square.Position + positions)
+                .Single(x => x.Position == newPosition)
                 .Players.Add(player);
+        }
+
+        public int PositionOf(Player player)
+        {
+            return Squares
+                .Single(x => x.Players.Contains(player))
+                .Position;
         }
     }
 }

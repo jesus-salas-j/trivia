@@ -11,8 +11,6 @@ namespace TriviaGame
         private const int QUESTIONS_NUMBER = 50;
         private bool notAWinner;
 
-        private int[] places = new int[6];
-
         private LinkedList<string> popQuestions = new LinkedList<string>();
         private LinkedList<string> scienceQuestions = new LinkedList<string>();
         private LinkedList<string> sportsQuestions = new LinkedList<string>();
@@ -76,8 +74,9 @@ namespace TriviaGame
 
         public void add(String playerName)
         {
-            playersService.Add(new Player(playerName));
-            places[playersService.Count()] = 0;
+            Player player = new Player(playerName);
+            playersService.Add(player);
+            board.Add(player);
 
             Console.WriteLine(playerName + " was added");
             Console.WriteLine("They are player number " + playersService.Count());
@@ -95,12 +94,11 @@ namespace TriviaGame
                     isGettingOutOfPenaltyBox = true;
 
                     Console.WriteLine(playersService.Current().Name + " is getting out of the penalty box");
-                    places[currentPlayer] = places[currentPlayer] + roll;
-                    if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+                    board.MovePlayerForward(playersService.Current(), roll);
 
                     Console.WriteLine(playersService.Current().Name
                             + "'s new location is "
-                            + places[currentPlayer]);
+                            + board.PositionOf(playersService.Current()));
                     Console.WriteLine("The category is " + currentCategory());
                     askQuestion();
                 }
@@ -109,17 +107,14 @@ namespace TriviaGame
                     Console.WriteLine(playersService.Current().Name + " is not getting out of the penalty box");
                     isGettingOutOfPenaltyBox = false;
                 }
-
             }
             else
             {
-
-                places[currentPlayer] = places[currentPlayer] + roll;
-                if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+                board.MovePlayerForward(playersService.Current(), roll);
 
                 Console.WriteLine(playersService.Current().Name
                         + "'s new location is "
-                        + places[currentPlayer]);
+                        + board.PositionOf(playersService.Current()));
                 Console.WriteLine("The category is " + currentCategory());
                 askQuestion();
             }
@@ -170,15 +165,15 @@ namespace TriviaGame
 
         private String currentCategory() 
         {
-            if (places[currentPlayer] == 0) return "Pop";
-            if (places[currentPlayer] == 4) return "Pop";
-            if (places[currentPlayer] == 8) return "Pop";
-            if (places[currentPlayer] == 1) return "Science";
-            if (places[currentPlayer] == 5) return "Science";
-            if (places[currentPlayer] == 9) return "Science";
-            if (places[currentPlayer] == 2) return "Sports";
-            if (places[currentPlayer] == 6) return "Sports";
-            if (places[currentPlayer] == 10) return "Sports";
+            if (board.PositionOf(playersService.Current()) == 0) return "Pop";
+            if (board.PositionOf(playersService.Current()) == 4) return "Pop";
+            if (board.PositionOf(playersService.Current()) == 8) return "Pop";
+            if (board.PositionOf(playersService.Current()) == 1) return "Science";
+            if (board.PositionOf(playersService.Current()) == 5) return "Science";
+            if (board.PositionOf(playersService.Current()) == 9) return "Science";
+            if (board.PositionOf(playersService.Current()) == 2) return "Sports";
+            if (board.PositionOf(playersService.Current()) == 6) return "Sports";
+            if (board.PositionOf(playersService.Current()) == 10) return "Sports";
             return "Rock";
         }
 
@@ -209,13 +204,9 @@ namespace TriviaGame
                     playersService.SetNextPlayerAsCurrent();
                     return true;
                 }
-
-
-
             }
             else
             {
-
                 Console.WriteLine("Answer was corrent!!!!");
                 playersService.Current().IncrementGoldCoins();
                 Console.WriteLine(playersService.Current().Name

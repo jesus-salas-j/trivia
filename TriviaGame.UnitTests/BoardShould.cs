@@ -69,5 +69,27 @@ namespace TriviaGame.UnitTests
             Assert.IsFalse(board.GetPlayersIn(originSquare).Contains(A_PLAYER));
             Assert.IsTrue(board.GetPlayersIn(endSquare).Contains(A_PLAYER));
         }
+
+        [TestMethod]
+        public void Move_player_circular()
+        {
+            int positions = 14;
+            Square originSquare = new Square(0);
+            Square endSquare = new Square(2);
+            board.Add(A_PLAYER);
+
+            board.MovePlayerForward(player: A_PLAYER, positions: positions);
+
+            Assert.IsFalse(board.GetPlayersIn(originSquare).Contains(A_PLAYER));
+            Assert.IsTrue(board.GetPlayersIn(endSquare).Contains(A_PLAYER));
+        }
+
+        [TestMethod]
+        public void Tell_a_player_position()
+        {
+            board.Add(A_PLAYER);
+
+            Assert.AreEqual(0, board.PositionOf(A_PLAYER));
+        }
     }
 }
