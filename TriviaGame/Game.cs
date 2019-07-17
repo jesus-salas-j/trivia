@@ -16,7 +16,6 @@ namespace TriviaGame
         private LinkedList<string> sportsQuestions = new LinkedList<string>();
         private LinkedList<string> rockQuestions = new LinkedList<string>();
 
-        private int currentPlayer = 0;
         private bool isGettingOutOfPenaltyBox;
 
         private PlayersService playersService;
@@ -56,9 +55,6 @@ namespace TriviaGame
                     Console.WriteLine("Question was incorrectly answered");
                     Console.WriteLine(playersService.Current().Name + " was sent to the penalty box");
                     board.PutInPenaltyBox(playersService.Current());
-
-                    currentPlayer++;
-                    if (currentPlayer == playersService.Count()) currentPlayer = 0;
                     playersService.SetNextPlayerAsCurrent();
                 }
                 else
@@ -191,16 +187,12 @@ namespace TriviaGame
                             + " Gold Coins.");
 
                     bool winner = playersService.Current().GoldCoins() != COINS_TO_WIN;
-                    currentPlayer++;
-                    if (currentPlayer == playersService.Count()) currentPlayer = 0;
                     playersService.SetNextPlayerAsCurrent();
 
                     return winner;
                 }
                 else
                 {
-                    currentPlayer++;
-                    if (currentPlayer == playersService.Count()) currentPlayer = 0;
                     playersService.SetNextPlayerAsCurrent();
                     return true;
                 }
@@ -215,8 +207,6 @@ namespace TriviaGame
                         + " Gold Coins.");
 
                 bool winner = playersService.Current().GoldCoins() != COINS_TO_WIN;
-                currentPlayer++;
-                if (currentPlayer == playersService.Count()) currentPlayer = 0;
                 playersService.SetNextPlayerAsCurrent();
 
                 return winner;
