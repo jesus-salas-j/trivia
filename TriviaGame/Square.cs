@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace TriviaGame
 {
     public class Square
     {
-        private readonly int position;
+        public int Position { get; }
         public List<Player> Players { get; }
 
         public Square(int position)
         {
-            this.position = position;
+            Position = position;
             Players = new List<Player>();
         }
 
@@ -27,12 +26,12 @@ namespace TriviaGame
         public override bool Equals(object obj)
         {
             return obj is Square square &&
-                   position == square.position;
+                   Position == square.Position;
         }
 
         public override int GetHashCode()
         {
-            return 1206833562 + position.GetHashCode();
+            return 1206833562 + Position.GetHashCode();
         }
 
     }

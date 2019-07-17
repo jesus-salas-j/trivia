@@ -57,13 +57,14 @@ namespace TriviaGame.UnitTests
         }
 
         [TestMethod]
-        public void Move_player_to_square()
+        public void Move_player_forward()
         {
+            int positions = 3;
             Square originSquare = new Square(0);
             Square endSquare = new Square(3);
             board.Add(A_PLAYER);
 
-            board.MovePlayerToSquare(A_PLAYER, endSquare);
+            board.MovePlayerForward(player: A_PLAYER, positions: positions);
 
             Assert.IsFalse(board.GetPlayersIn(originSquare).Contains(A_PLAYER));
             Assert.IsTrue(board.GetPlayersIn(endSquare).Contains(A_PLAYER));

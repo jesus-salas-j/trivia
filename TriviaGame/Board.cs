@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TriviaGame
@@ -58,15 +59,13 @@ namespace TriviaGame
             }
         }
 
-        public void MovePlayerToSquare(Player player, Square square)
+        public void MovePlayerForward(Player player, int positions)
         {
+            Square square = Squares.Single(x => x.Players.Contains(player));
+            square.Players.Remove(player);
             Squares
-                .Single(x => x.Players.Contains(player))
-                .Players.Remove(player);
-
-            Squares
-                .Single(x => x.Equals(square))
-                .Players.Add(player);                
+                .Single(x => x.Position == square.Position + positions)
+                .Players.Add(player);
         }
     }
 }
