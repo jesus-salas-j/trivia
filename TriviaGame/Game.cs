@@ -52,8 +52,8 @@ namespace TriviaGame
                 if (squares[next] == 7)
                 {
                     notAWinner = true;
-                    Console.WriteLine("Question was incorrectly answered");
-                    Console.WriteLine(playersService.Current().Name + " was sent to the penalty box");
+                    MessagingService.Send("Question was incorrectly answered");
+                    MessagingService.Send(playersService.Current().Name + " was sent to the penalty box");
                     board.PutInPenaltyBox(playersService.Current());
                     playersService.SetNextPlayerAsCurrent();
                 }
@@ -74,14 +74,14 @@ namespace TriviaGame
             playersService.Add(player);
             board.Add(player);
 
-            Console.WriteLine(playerName + " was added");
-            Console.WriteLine("They are player number " + playersService.Count());
+            MessagingService.Send(playerName + " was added");
+            MessagingService.Send("They are player number " + playersService.Count());
         }
 
         public void roll(int roll)
         {
-            Console.WriteLine(playersService.Current().Name + " is the current player");
-            Console.WriteLine("They have rolled a " + roll);
+            MessagingService.Send(playersService.Current().Name + " is the current player");
+            MessagingService.Send("They have rolled a " + roll);
 
             if (board.IsInPenaltyBox(playersService.Current()))
             {
@@ -89,18 +89,18 @@ namespace TriviaGame
                 {
                     isGettingOutOfPenaltyBox = true;
 
-                    Console.WriteLine(playersService.Current().Name + " is getting out of the penalty box");
+                    MessagingService.Send(playersService.Current().Name + " is getting out of the penalty box");
                     board.MovePlayerForward(playersService.Current(), roll);
 
-                    Console.WriteLine(playersService.Current().Name
+                    MessagingService.Send(playersService.Current().Name
                             + "'s new location is "
                             + board.PositionOf(playersService.Current()));
-                    Console.WriteLine("The category is " + currentCategory());
+                    MessagingService.Send("The category is " + currentCategory());
                     askQuestion();
                 }
                 else
                 {
-                    Console.WriteLine(playersService.Current().Name + " is not getting out of the penalty box");
+                    MessagingService.Send(playersService.Current().Name + " is not getting out of the penalty box");
                     isGettingOutOfPenaltyBox = false;
                 }
             }
@@ -108,10 +108,10 @@ namespace TriviaGame
             {
                 board.MovePlayerForward(playersService.Current(), roll);
 
-                Console.WriteLine(playersService.Current().Name
+                MessagingService.Send(playersService.Current().Name
                         + "'s new location is "
                         + board.PositionOf(playersService.Current()));
-                Console.WriteLine("The category is " + currentCategory());
+                MessagingService.Send("The category is " + currentCategory());
                 askQuestion();
             }
 
@@ -138,22 +138,22 @@ namespace TriviaGame
         {
             if (currentCategory() == "Pop")
             {
-                Console.WriteLine(popQuestions.First());
+                MessagingService.Send(popQuestions.First());
                 popQuestions.RemoveFirst();
             }
             if (currentCategory() == "Science")
             {
-                Console.WriteLine(scienceQuestions.First());
+                MessagingService.Send(scienceQuestions.First());
                 scienceQuestions.RemoveFirst();
             }
             if (currentCategory() == "Sports")
             {
-                Console.WriteLine(sportsQuestions.First());
+                MessagingService.Send(sportsQuestions.First());
                 sportsQuestions.RemoveFirst();
             }
             if (currentCategory() == "Rock")
             {
-                Console.WriteLine(rockQuestions.First());
+                MessagingService.Send(rockQuestions.First());
                 rockQuestions.RemoveFirst();
             }
         }
@@ -179,9 +179,9 @@ namespace TriviaGame
             {
                 if (isGettingOutOfPenaltyBox)
                 {
-                    Console.WriteLine("Answer was correct!!!!");
+                    MessagingService.Send("Answer was correct!!!!");
                     playersService.Current().IncrementGoldCoins();
-                    Console.WriteLine(playersService.Current().Name
+                    MessagingService.Send(playersService.Current().Name
                             + " now has "
                             + playersService.Current().GoldCoins()
                             + " Gold Coins.");
@@ -199,9 +199,9 @@ namespace TriviaGame
             }
             else
             {
-                Console.WriteLine("Answer was corrent!!!!");
+                MessagingService.Send("Answer was corrent!!!!");
                 playersService.Current().IncrementGoldCoins();
-                Console.WriteLine(playersService.Current().Name
+                MessagingService.Send(playersService.Current().Name
                         + " now has "
                         + playersService.Current().GoldCoins()
                         + " Gold Coins.");
