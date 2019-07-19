@@ -21,7 +21,7 @@ namespace TriviaGame.UnitTests
         }
 
         [TestMethod]
-        public void Set_a_player_in_penalty_box()
+        public void Set_player_in_penalty_box()
         {
             board.PutInPenaltyBox(A_PLAYER);
 
@@ -29,11 +29,11 @@ namespace TriviaGame.UnitTests
         }
 
         [TestMethod]
-        public void Take_player_out_of_penalty_box()
+        public void Take_player_off_penalty_box()
         {
             board.PutInPenaltyBox(A_PLAYER);
 
-            board.TakeOutOfPenaltyBox(A_PLAYER);
+            board.TakeOffPenaltyBox(A_PLAYER);
 
             Assert.AreEqual(0, board.PlayersInPenaltyBox());
         }

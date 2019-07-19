@@ -26,7 +26,7 @@ namespace TriviaGame
             return playersInPenaltyBox.Contains(player);
         }
 
-        public void TakeOutOfPenaltyBox(Player player)
+        public void TakeOffPenaltyBox(Player player)
         {
             playersInPenaltyBox.Remove(player);
         }

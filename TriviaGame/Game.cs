@@ -9,8 +9,6 @@ namespace TriviaGame
         private const int COINS_TO_WIN = 6;
         private bool notAWinner;
 
-        private bool isGettingOutOfPenaltyBox;
-
         private PlayersService playersService;
         private QuestionsService questionsService;
         private Board board;
@@ -77,8 +75,7 @@ namespace TriviaGame
             {
                 if (roll % 2 != 0)
                 {
-                    isGettingOutOfPenaltyBox = true;
-
+                    board.TakeOffPenaltyBox(playersService.Current());
                     MessagingService.Send(playersService.Current().Name + " is getting out of the penalty box");
                     board.MovePlayerForward(playersService.Current(), roll);
 
@@ -91,7 +88,6 @@ namespace TriviaGame
                 else
                 {
                     MessagingService.Send(playersService.Current().Name + " is not getting out of the penalty box");
-                    isGettingOutOfPenaltyBox = false;
                 }
             }
             else
@@ -137,25 +133,8 @@ namespace TriviaGame
         {
             if (board.IsInPenaltyBox(playersService.Current()))
             {
-                if (isGettingOutOfPenaltyBox)
-                {
-                    MessagingService.Send("Answer was correct!!!!");
-                    playersService.Current().IncrementGoldCoins();
-                    MessagingService.Send(playersService.Current().Name
-                            + " now has "
-                            + playersService.Current().GoldCoins()
-                            + " Gold Coins.");
-
-                    bool winner = playersService.Current().GoldCoins() != COINS_TO_WIN;
-                    playersService.SetNextPlayerAsCurrent();
-
-                    return winner;
-                }
-                else
-                {
-                    playersService.SetNextPlayerAsCurrent();
-                    return true;
-                }
+                playersService.SetNextPlayerAsCurrent();
+                return true;
             }
             else
             {
