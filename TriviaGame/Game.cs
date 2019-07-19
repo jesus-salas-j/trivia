@@ -47,7 +47,23 @@ namespace TriviaGame
                 }
                 else
                 {
-                    notAWinner = wasCorrectlyAnswered();
+                    if (board.IsInPenaltyBox(playersService.Current()))
+                    {
+                        playersService.SetNextPlayerAsCurrent();
+                        notAWinner = true;
+                    }
+                    else
+                    {
+                        MessagingService.Send("Answer was corrent!!!!");
+                        playersService.Current().IncrementGoldCoins();
+                        MessagingService.Send(playersService.Current().Name
+                                + " now has "
+                                + playersService.Current().GoldCoins()
+                                + " Gold Coins.");
+
+                        notAWinner = playersService.Current().GoldCoins() != COINS_TO_WIN;
+                        playersService.SetNextPlayerAsCurrent();
+                    }
                 }
 
                 next++;
@@ -133,29 +149,6 @@ namespace TriviaGame
         {
             int currentPosition = board.PositionOf(playersService.Current());
             return board.CategoryFrom(currentPosition);
-        }
-
-        private bool wasCorrectlyAnswered()
-        {
-            if (board.IsInPenaltyBox(playersService.Current()))
-            {
-                playersService.SetNextPlayerAsCurrent();
-                return true;
-            }
-            else
-            {
-                MessagingService.Send("Answer was corrent!!!!");
-                playersService.Current().IncrementGoldCoins();
-                MessagingService.Send(playersService.Current().Name
-                        + " now has "
-                        + playersService.Current().GoldCoins()
-                        + " Gold Coins.");
-
-                bool hasNotWon = playersService.Current().GoldCoins() != COINS_TO_WIN;
-                playersService.SetNextPlayerAsCurrent();
-
-                return hasNotWon;
-           } 
         }
 
         private static List<int> CreateSquaresSequence()
