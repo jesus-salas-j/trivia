@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace TriviaGame
@@ -53,9 +52,9 @@ namespace TriviaGame
         {
             Squares = new List<Square>();
 
-            for (int i = 0; i < NUMBER_OF_SQUARES; i++)
+            for (int position = 0; position < NUMBER_OF_SQUARES; position++)
             {
-                Squares.Add(new Square(i));
+                Squares.Add(new Square(position, GetCategoryFrom(position)));
             }
         }
 
@@ -74,6 +73,31 @@ namespace TriviaGame
             return Squares
                 .Single(x => x.Players.Contains(player))
                 .Position;
+        }
+
+        public Category CategoryFrom(int position)
+        {
+            return Squares
+                .Single(x => x.Position == position)
+                .Category;
+        }
+
+        private Category GetCategoryFrom(int position)
+        {
+            if (position % 4 == 0)
+            {
+                return Category.Pop;
+            }
+            else if (position % 4 == 1)
+            {
+                return Category.Science;
+            }
+            else if (position % 4 == 2)
+            {
+                return Category.Sports;
+            }
+
+            return Category.Rock;
         }
     }
 }

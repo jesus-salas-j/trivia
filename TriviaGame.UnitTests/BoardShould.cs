@@ -49,7 +49,7 @@ namespace TriviaGame.UnitTests
         [TestMethod]
         public void Put_player_in_board()
         {
-            Square square = new Square(0);
+            Square square = new Square(position: 0, category: Category.Pop);
 
             board.Add(A_PLAYER);
 
@@ -60,8 +60,8 @@ namespace TriviaGame.UnitTests
         public void Move_player_forward()
         {
             int positions = 3;
-            Square originSquare = new Square(0);
-            Square endSquare = new Square(3);
+            Square originSquare = new Square(position: 0, category: Category.Pop);
+            Square endSquare = new Square(position: 3, category: Category.Pop);
             board.Add(A_PLAYER);
 
             board.MovePlayerForward(player: A_PLAYER, positions: positions);
@@ -74,8 +74,8 @@ namespace TriviaGame.UnitTests
         public void Move_player_circular()
         {
             int positions = 14;
-            Square originSquare = new Square(0);
-            Square endSquare = new Square(2);
+            Square originSquare = new Square(position: 0, category: Category.Pop);
+            Square endSquare = new Square(position: 2, category: Category.Pop);
             board.Add(A_PLAYER);
 
             board.MovePlayerForward(player: A_PLAYER, positions: positions);
@@ -90,6 +90,12 @@ namespace TriviaGame.UnitTests
             board.Add(A_PLAYER);
 
             Assert.AreEqual(0, board.PositionOf(A_PLAYER));
+        }
+
+        [TestMethod]
+        public void Return_position_category()
+        {
+            Assert.AreEqual(Category.Pop, board.CategoryFrom(position: 0));
         }
     }
 }

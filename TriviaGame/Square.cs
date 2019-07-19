@@ -5,11 +5,13 @@ namespace TriviaGame
     public class Square
     {
         public int Position { get; }
+        public Category Category { get; }
         public List<Player> Players { get; }
 
-        public Square(int position)
+        public Square(int position, Category category)
         {
             Position = position;
+            Category = category;
             Players = new List<Player>();
         }
 

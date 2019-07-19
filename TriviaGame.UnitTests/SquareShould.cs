@@ -10,7 +10,7 @@ namespace TriviaGame.UnitTests
         [TestMethod]
         public void Add_player()
         {
-            Square square = new Square(position: 0);
+            Square square = new Square(position: 0, category: Category.Pop);
 
             square.Add(A_PLAYER);
 
@@ -20,7 +20,7 @@ namespace TriviaGame.UnitTests
         [TestMethod]
         public void Remove_player()
         {
-            Square square = new Square(position: 0);
+            Square square = new Square(position: 0, category: Category.Pop);
 
             square.Add(A_PLAYER);
             square.Remove(A_PLAYER);

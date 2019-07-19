@@ -8,17 +8,12 @@ namespace TriviaGame
     public class Game
     {
         private const int COINS_TO_WIN = 6;
-        private const int QUESTIONS_NUMBER = 50;
         private bool notAWinner;
-
-        private LinkedList<string> popQuestions = new LinkedList<string>();
-        private LinkedList<string> scienceQuestions = new LinkedList<string>();
-        private LinkedList<string> sportsQuestions = new LinkedList<string>();
-        private LinkedList<string> rockQuestions = new LinkedList<string>();
 
         private bool isGettingOutOfPenaltyBox;
 
         private PlayersService playersService;
+        private QuestionsService questionsService;
         private Board board;
 
         private StreamWriter writer;
@@ -26,19 +21,15 @@ namespace TriviaGame
         public Game()
         {
             SetConsoleOutputToFile();
-            InitializeQuestions();
 
             playersService = new PlayersService();
+            questionsService = new QuestionsService();
             board = new Board();
         }
 
         public void Run()
         {
-            add("Chet");
-            add("Pat");
-            add("Sue");
-
-            playersService.SetFirstPlayerAsCurrent();
+            InitializePlayers();
 
             List<int> rolls = CreateRollsSequence();
             List<int> squares = CreateSquaresSequence();
@@ -68,7 +59,7 @@ namespace TriviaGame
             writer.Close();
         }
 
-        public void add(String playerName)
+        public void Add(String playerName)
         {
             Player player = new Player(playerName);
             playersService.Add(player);
@@ -95,7 +86,7 @@ namespace TriviaGame
                     MessagingService.Send(playersService.Current().Name
                             + "'s new location is "
                             + board.PositionOf(playersService.Current()));
-                    MessagingService.Send("The category is " + currentCategory());
+                    MessagingService.Send("The category is " + CurrentCategory().ToString());
                     askQuestion();
                 }
                 else
@@ -111,10 +102,19 @@ namespace TriviaGame
                 MessagingService.Send(playersService.Current().Name
                         + "'s new location is "
                         + board.PositionOf(playersService.Current()));
-                MessagingService.Send("The category is " + currentCategory());
+                MessagingService.Send("The category is " + CurrentCategory().ToString());
                 askQuestion();
             }
 
+        }
+
+        private void InitializePlayers()
+        {
+            Add("Chet");
+            Add("Pat");
+            Add("Sue");
+
+            playersService.SetFirstPlayerAsCurrent();
         }
 
         private void SetConsoleOutputToFile()
@@ -123,57 +123,19 @@ namespace TriviaGame
             Console.SetOut(writer);
         }
 
-        private void InitializeQuestions()
-        {
-            for (int i = 0; i < QUESTIONS_NUMBER; i++)
-            {
-                popQuestions.AddLast("Pop Question " + i);
-                scienceQuestions.AddLast(("Science Question " + i));
-                sportsQuestions.AddLast(("Sports Question " + i));
-                rockQuestions.AddLast("Rock Question " + i);
-            }
-        }
-
         private void askQuestion()
         {
-            if (currentCategory() == "Pop")
-            {
-                MessagingService.Send(popQuestions.First());
-                popQuestions.RemoveFirst();
-            }
-            if (currentCategory() == "Science")
-            {
-                MessagingService.Send(scienceQuestions.First());
-                scienceQuestions.RemoveFirst();
-            }
-            if (currentCategory() == "Sports")
-            {
-                MessagingService.Send(sportsQuestions.First());
-                sportsQuestions.RemoveFirst();
-            }
-            if (currentCategory() == "Rock")
-            {
-                MessagingService.Send(rockQuestions.First());
-                rockQuestions.RemoveFirst();
-            }
+            Category currentCategory = CurrentCategory();
+            MessagingService.Send(questionsService.Next(currentCategory).Content);
         }
 
-
-        private String currentCategory() 
+        private Category CurrentCategory()
         {
-            if (board.PositionOf(playersService.Current()) == 0) return "Pop";
-            if (board.PositionOf(playersService.Current()) == 4) return "Pop";
-            if (board.PositionOf(playersService.Current()) == 8) return "Pop";
-            if (board.PositionOf(playersService.Current()) == 1) return "Science";
-            if (board.PositionOf(playersService.Current()) == 5) return "Science";
-            if (board.PositionOf(playersService.Current()) == 9) return "Science";
-            if (board.PositionOf(playersService.Current()) == 2) return "Sports";
-            if (board.PositionOf(playersService.Current()) == 6) return "Sports";
-            if (board.PositionOf(playersService.Current()) == 10) return "Sports";
-            return "Rock";
+            int currentPosition = board.PositionOf(playersService.Current());
+            return board.CategoryFrom(currentPosition);
         }
 
-        public bool wasCorrectlyAnswered()
+        private bool wasCorrectlyAnswered()
         {
             if (board.IsInPenaltyBox(playersService.Current()))
             {
