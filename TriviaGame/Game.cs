@@ -35,7 +35,7 @@ namespace TriviaGame
 
             do
             {
-                roll(rolls[next]);
+                Roll(rolls[next]);
 
                 if (squares[next] == 7)
                 {
@@ -66,23 +66,24 @@ namespace TriviaGame
             MessagingService.Send("They are player number " + playersService.Count());
         }
 
-        public void roll(int roll)
+        public void Roll(int roll)
         {
             MessagingService.Send(playersService.Current().Name + " is the current player");
             MessagingService.Send("They have rolled a " + roll);
 
             if (board.IsInPenaltyBox(playersService.Current()))
             {
-                if (roll % 2 != 0)
+                if (IsPair(roll))
                 {
-                    board.TakeOffPenaltyBox(playersService.Current());
-                    MessagingService.Send(playersService.Current().Name + " is getting out of the penalty box");
+                    board.TakeOffPenaltyBox(playersService.Current());                    
                     board.MovePlayerForward(playersService.Current(), roll);
 
+                    MessagingService.Send(playersService.Current().Name + " is getting out of the penalty box");
                     MessagingService.Send(playersService.Current().Name
                             + "'s new location is "
                             + board.PositionOf(playersService.Current()));
                     MessagingService.Send("The category is " + CurrentCategory().ToString());
+
                     AskQuestion();
                 }
                 else
@@ -98,9 +99,14 @@ namespace TriviaGame
                         + "'s new location is "
                         + board.PositionOf(playersService.Current()));
                 MessagingService.Send("The category is " + CurrentCategory().ToString());
+
                 AskQuestion();
             }
+        }
 
+        private static bool IsPair(int roll)
+        {
+            return roll % 2 != 0;
         }
 
         private void InitializePlayers()
@@ -145,10 +151,10 @@ namespace TriviaGame
                         + playersService.Current().GoldCoins()
                         + " Gold Coins.");
 
-                bool winner = playersService.Current().GoldCoins() != COINS_TO_WIN;
+                bool hasNotWon = playersService.Current().GoldCoins() != COINS_TO_WIN;
                 playersService.SetNextPlayerAsCurrent();
 
-                return winner;
+                return hasNotWon;
            } 
         }
 
