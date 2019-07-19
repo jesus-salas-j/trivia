@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace TriviaGame
 {
@@ -87,7 +86,7 @@ namespace TriviaGame
                             + "'s new location is "
                             + board.PositionOf(playersService.Current()));
                     MessagingService.Send("The category is " + CurrentCategory().ToString());
-                    askQuestion();
+                    AskQuestion();
                 }
                 else
                 {
@@ -103,7 +102,7 @@ namespace TriviaGame
                         + "'s new location is "
                         + board.PositionOf(playersService.Current()));
                 MessagingService.Send("The category is " + CurrentCategory().ToString());
-                askQuestion();
+                AskQuestion();
             }
 
         }
@@ -123,10 +122,9 @@ namespace TriviaGame
             Console.SetOut(writer);
         }
 
-        private void askQuestion()
+        private void AskQuestion()
         {
-            Category currentCategory = CurrentCategory();
-            MessagingService.Send(questionsService.Next(currentCategory).Content);
+            MessagingService.Send(questionsService.Next(CurrentCategory()).Content);
         }
 
         private Category CurrentCategory()
